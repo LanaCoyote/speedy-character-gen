@@ -5,6 +5,7 @@ function extend( obj1, obj2 ) {
     obj2.call( this );
     obj1.apply( this, arguments );
   };
+  return obj1;
 }
   
 // QSContainer
@@ -60,12 +61,12 @@ QSContainer.prototype.get = function( name ) {
 // Character
 // 
 function Character( name ) {
+  QSContainer.call( this );
+
   this.name = name;
-  this.statistics = {};
-  this.qualities = {};
 }
 
-extend( Character, QSContainer );
+Character = extend( Character, QSContainer );
 
 // Statistic
 // statistics are quantifiable values
@@ -116,10 +117,12 @@ Statistic.prototype.valueOf = function() {
 // qualities are quantitative values that can have effects when applied to a
 // character, or even substatistics and qualities.
 function Quality( name, text, onapply, onremove ) {
+  QSContainer.call( this );
+
   this.name = name;
   this.text = text;
   this.onapply = onapply;
   this.onremove = onremove;
 }
 
-extend( Quality, QSContainer );
+Quality = extend( Quality, QSContainer );
