@@ -32,4 +32,3 @@ Dice.prototype.roll = function() {
   }, 0 );
 }
 
-module.exports = Dice;
