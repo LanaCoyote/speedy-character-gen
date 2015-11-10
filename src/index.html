@@ -1,8 +1,48 @@
 <html>
   <head>
     <script src="character.js" type="text/javascript"></script>
-    <script src="tests/character.js" type="text/javascript"></script>
+    <script src="dice.js" type="text/javascript"></script>
+    <!--<script src="tests/character.js" type="text/javascript"></script>-->
+    <script src="pathfinder/core.js" type="text/javascript"></script>
+
+    <script>
+      var chara = new PathfinderCharacter( "Joe", CLASS_BARD );
+      chara.get('core').get('INT').value = 18;
+      chara.get('core').get('DEX').value = 8;
+      chara.get('core').get('CHA').value = 13;
+      console.dir( chara );
+
+      window.onload = function() {
+        console.log( "load done" );
+        document.getElementById( "character-name" ).innerHTML = chara.name;
+
+        var core_stat_table = document.getElementById( "core-stats" );
+        chara.get('core').statArray().forEach( function( stat ) {
+          var stat_row = document.createElement( "tr" );
+          
+          var stat_name = document.createElement( "td" );
+          stat_name.innerHTML = stat.name;
+          stat_row.appendChild( stat_name );
+
+          var stat_value = document.createElement( "td" );
+          stat_value.innerHTML = stat.value;
+          stat_row.appendChild( stat_value );
+
+          var stat_mod = document.createElement( "td" );
+          stat_mod.innerHTML = stat.mod();
+          stat_row.appendChild( stat_mod );
+
+          core_stat_table.appendChild( stat_row );
+        } );
+      };
+    </script>
   </head>
   <body>
+    <h1 id="character-name"></h1>
+    
+    <h2>Core Stats</h2>
+    <table id="core-stats">
+      <tr><td>Attribute</td><td>Value</td><td>Mod</td></tr>
+    </table>
   </body>
 </html>
