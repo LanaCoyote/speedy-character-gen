@@ -30,7 +30,9 @@ QSContainer.prototype.getStat = function( statName ) {
 }
 
 QSContainer.prototype.statArray = function () {
-  return [].slice.call( this.statistics );
+  var stats = [];
+  for ( var k in this.statistics ) stats.push( this.statistics[k] );
+  return stats;
 }
 
 QSContainer.prototype.addQual = function ( qual ) {
@@ -49,7 +51,9 @@ QSContainer.prototype.getQual = function( qualName ) {
 }
 
 QSContainer.prototype.qualArray = function () {
-  return [].slice.call( this.qualities );
+  var quals = [];
+  for ( var k in this.qualities ) quals.push( this.qualities[k] );
+  return quals;
 }
 
 QSContainer.prototype.get = function( name ) {
